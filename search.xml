@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Ubuntu16.04安装VMWare Workstation]]></title>
+    <url>%2F2018%2F03%2F07%2FUbuntu16.04%E5%AE%89%E8%A3%85VMWare%20Workstation%2F</url>
+    <content type="text"><![CDATA[一、安装过程1. 安装开发工具1$ sudo apt install build-essential 2. 下载从VMWare的官网http://www.vmware.com/go/tryworkstation-linux-64 下载，文件类型是.bundle。此时下载的版本是Vmware Workstation 14。 3. 安装VMWare12$ chmod a+x VMware-Workstation-Full-14.1.1-7528167.x86_64.bundle$ sudo ./VMware-Workstation-Full-14.1.1-7528167.x86_64.bundle 执行后会出现VMWare的安装窗口，需要同意协议、选择是否在启动时检查更新等操作，最后安装完成。 4. 启动VMWare在终端启动，或者在菜单启动1$ vmware 5. 激活密钥网上找的VMware workstation 14永久激活密钥：123456789CG54H-D8D0H-H8DHY-C6X7X-N2KG6ZC3WK-AFXEK-488JP-A7MQX-XL8YFAC5XK-0ZD4H-088HP-9NQZV-ZG2R4ZC5XK-A6E0M-080XQ-04ZZG-YF08DZY5H0-D3Y8K-M89EZ-AYPEG-MYUA8FF590-2DX83-M81LZ-XDM7E-MKUT4FF31K-AHZD1-H8ETZ-8WWEZ-WUUVACV7T2-6WY5Q-48EWP-ZXY7X-QGUWDAALYG-20HVE-WHQ13-67MUP-XVMF3 6. 卸载VMWare1$ sudo vmware-installer --uninstall-product vmware-workstation 二、解决could not open /dev/vmmon no such file or directory问题1. 方法1123456$ cd /tmp$ tar -xzvf /usr/lib/vmware/modules/source/vmmon.tar$ cd vmmon-only/$ make$ sudo cp vmmon.ko /lib/modules/4.4.0-116-generic/misc/vmmon.ko$ sudo modprobe vmmon 如果执行tar解压时候出现：123gzip: stdin: not in gzip formattar: Child returned status 1tar: Error is not recoverable: exiting now 则将上面tar -xzvf /usr/lib/vmware/modules/source/vmmon.tar命令改为：tar xvf /usr/lib/vmware/modules/source/vmmon.tar 执行完上面的步骤之后，启动虚拟机，看是否解决了问题。 参考：https://communities.vmware.com/message/2442783 2. 方法2可能出现的原因和gcc版本有关，所以查看自己gcc的版本：12345$ gcc --versiongcc (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609Copyright (C) 2015 Free Software Foundation, Inc.This is free software; see the source for copying conditions. There is NOwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 如果gcc版本太低，例如4.5（4.6及以上应该没问题），则安装新版本的gcc，例如：123$ sudo apt install gcc-5$ sudo rm /usr/bin/gcc$ sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc 确认更新gcc版本之后，执行：1$ sudo vmware-modconfig --console --install-all 如果最后出现以下结果则表示成功。12345678Starting VMware services: Virtual machine monitor done Virtual machine communication interface done VM communication interface socket family done Blocking file system done Virtual ethernet done VMware Authentication Daemon done Shared Memory Available done 如果最后执行结果中出现了如下的failed，则关闭BIOS中的secure boot，然后再执行：sudo vmware-modconfig --console --install-all12345678Starting VMware services: Virtual machine monitor failed Virtual machine communication interface done VM communication interface socket family done Blocking file system done Virtual ethernet failed VMware Authentication Daemon done Shared Memory Available done 参考：https://communities.vmware.com/message/2611517#2611517]]></content>
+      <categories>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>VMWare Workstation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu搭载Android开发环境（无需翻墙）]]></title>
+    <url>%2F2017%2F11%2F27%2FUbuntu%E6%90%AD%E8%BD%BDAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E6%97%A0%E9%9C%80%E7%BF%BB%E5%A2%99%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[一、相关下载的地址 sdk下载 郑州大学：https://mirrors.zzu.edu.cn/android/repository/ 大连东软信息学院：http://mirrors.neusoft.edu.cn/android/repository/ Android studio Android Studio 中文社区(官网)：http://www.android-studio.org/ 二、下载SDK相关包新建SDK目录，SDK的目录下面用$SDK表示： 在$SDK下新建build-tools、tools、platform-tools、platforms四个文件夹。 下载build-tools 找到对应的平台，例如linux、macosx、windows等 解压下载的zip包，解压后得到android-6.0或23.0.1，放到$SDK/build-tools/目录下 下载sdk tools 找到对应的平台，例如linux、macosx、windows等 解压下载的zip包，解压后得到tools，直接放到$SDK/目录下 下载platform-tools 找到对应的平台，例如linux、macosx、windows等 解压下载的zip包，解压后得到platform-tools，直接放到$SDK/目录下 下载sdk 找到对应API的zip包，例如android-23_r02.zip（23_r03之前名字）或platform-23_r03.zip（23_r03及之后的名字），不分平台 解压下载的zip包，解压后得到android-6.0，放到$SDK/platforms/目录下 三、安装Android Studio 解压Android Studio的压缩包，Studio的目录下面用$STUDIO表示 cd到$STUDIO/bin目录，通过./studio.sh启动Studio 如果启动Studio的时出现Unable to access android sdk add-on list的问题，在$STUDIO/bin/idea.properties文件末尾添加：disable.android.first.run=true即可。 进入Studio。 四、其他问题说明：Studio的log文件在用户目录下$HOME/.AndroidStudio2.3/system/log中，其中目录可能因为Studio的版本不同而名字不同，例如.AndroidStudioPreview3.1。有问题均可查看该日志文件。 Error:Failed to find target with hash string &#39;android-26&#39; in $SDK的问题这个问题很可能是因为compileSdkVersion设置为26，也就是platforms目录下缺少Android8.0（API 26）。下载API 26并解压到platforms目录下即可。 Error:Failed to find Build Tools revision 27.0.1缺少build-tools 27.0.1的版本，下载对应的zip包，解压到build-tools即可]]></content>
+      <categories>
+        <category>Ubuntu</category>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>Android</tag>
+        <tag>开发环境</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[wine安装最新版QQ]]></title>
+    <url>%2F2017%2F11%2F26%2Fwine%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88QQ%2F</url>
+    <content type="text"><![CDATA[1. 安装wine本次教程只需要安装最新版本的wine，并不需要winetricks、wine-mono、wine-gecko等其他插件，目前经实际测试发现只运行WineQQ可以不需要wine-mono、wine-gecko、W2KSP4.exe、InstMsiW.exe等。 安装wine步骤如下：123456$ sudo dpkg --add-architecture i386$ wget https://dl.winehq.org/wine-builds/Release.key$ sudo apt-key add Release.key$ sudo apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/$ sudo apt-get update$ sudo apt-get install --install-recommends winehq-stable 至此wine安装完成，可以通过wine --version查看版本号（此时安装的是wine2.0.3）。 接下来需要执行winecfg来配置wine，接着会弹出安装wine-mono和wine-gecko的窗口，可以不用安装，关掉即可。 2. 配置wine 执行winecfg打开wine的配置窗口 点击Libraries 在New override for library中分别输入*ntoskrnl.exe、*riched20、*txplatform.exe，然后回车（名字前的*号可以省略）。 在Existing_overrides新出现的*ntoskrnl.exe和*txplatform.exe，分别点击Edit，均选择Disable；*riched20点击Edit，选择native then builtin 如果不配置riched20的话则安装好QQ后无法输入用户名 不停用txplatform.exe则WineQQ无法完整退出，导致关掉重开后提示QQ文件被占用 禁用ntoskrnl.exe是为了规避可能出现QQ无法启动的bug。 3. 解决乱码问题 初始配置运行winecfg，在Applications标签下把模拟的windows系统设置为windows xp 准备字体把Windows目录下的字体simsun.ttc复制到/usr/share/fonts/windows里面 在~/.wine/drive_c/windows/Fonts目录中创建两个符号链接： 12$ ln -s /usr/share/fonts/windows/simsun.ttc simsun.ttc$ ln -s /usr/share/fonts/windows/simsun.ttc simfang.ttc 修改~/.wine/system.reg 查找LogPixels，找到的行内容应该是：[System\\CurrentControlSet\\Hardware Profiles\\Current\\Software\\Fonts]将其中的&quot;LogPixels&quot;=dword:00000060改为：&quot;LogPixels&quot;=dword:00000070 查找FontSubstitutes，找到的行应该是：[Software\\Microsoft\\Windows NT\\CurrentVersion\\FontSubstitutes]将其中的：&quot;MS Shell Dlg&quot;=&quot;Tahoma&quot; &quot;MS Shell Dlg 2″=&quot;Tahoma&quot;改为：&quot;MS Shell Dlg&quot;=&quot;SimSun&quot; &quot;MS Shell Dlg 2″=&quot;SimSun&quot; 修改~/.wine/drive_c/windows/win.ini在末尾添加如下内容： 12345[Desktop]menufontsize=13messagefontsize=13statusfontsize=13IconTitleSize=13 把以下代码保存为zh.reg，然后执行regedit zh.reg 1234567891011121314151617181920212223242526REGEDIT4[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]"Arial"="simsun""Arial CE,238"="simsun""Arial CYR,204"="simsun""Arial Greek,161"="simsun""Arial TUR,162"="simsun""Courier New"="simsun""Courier New CE,238"="simsun""Courier New CYR,204"="simsun""Courier New Greek,161"="simsun""Courier New TUR,162"="simsun""FixedSys"="simsun""Helv"="simsun""Helvetica"="simsun""MS Sans Serif"="simsun""MS Shell Dlg"="simsun""MS Shell Dlg 2"="simsun""System"="simsun""Tahoma"="simsun""Times"="simsun""Times New Roman CE,238"="simsun""Times New Roman CYR,204"="simsun""Times New Roman Greek,161"="simsun""Times New Roman TUR,162"="simsun""Tms Rmn"="simsun" 4. 安装QQ 官网下载最新版QQ 使用wine进行安装： 1$ wine QQ8.9.3.exe 运行QQ 1$ wine $HOME/.wine/drive_c/Program\ Files\ \(x86\)/Tencent/QQ/Bin/QQ.exe 注意上面的$HOME为自己home目录。 5. 创建桌面图标创建以下内容的desktop文件：123456789[Desktop Entry]Version=1.0Type=ApplicationName=Tencent QQIcon=$HOME/Pictures/qq.pngExec=wine $HOME/.wine/drive_c/Program\ Files\ \(x86\)/Tencent/QQ/Bin/QQ.exeComment=QQCategories=Network;InstantMessaging;Terminal=false 注意：上面的$HOME改为自己的home目录路径，Icon的图标需要自己下载并放到本地。 将上面的文件名保存为QQ.desktop（文件后缀为desktop），修改权限为664，然后放到：$HOME/.local/share/applications/目录下，也可以直接将该文件拖到启动栏。 6. 存在的问题 无法保存密码； 页面部分字体会乱码（变成方框）； 无法输入中文（fcitx输入法，包括搜狗）：这一点很蛋疼，但有的人不会出现。可能解决方案： 卸载ibus，但亲测卸载ibus会把unity也一同卸载，所以不可行； 把要输入的文字在其他软件中（如gedit）编写，然后粘贴到聊天框； 7. 参考https://www.ubuntukylin.com/ukylin/forum.php?mod=viewthread&amp;tid=30511]]></content>
+      <categories>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+        <tag>wine</tag>
+        <tag>QQ</tag>
+      </tags>
+  </entry>
+</search>
