@@ -392,6 +392,206 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pentonbin.github.io/2018/12/09/Javaer入门Dart/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yao伟斌">
+      <meta itemprop="description" content="大抵是一条咸鱼吧～">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PentonBin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/09/Javaer入门Dart/" class="post-title-link" itemprop="https://pentonbin.github.io/index.html">Javaer入门Dart</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-09 15:25:00 / 修改时间：15:35:52" itemprop="dateCreated datePublished" datetime="2018-12-09T15:25:00+08:00">2018-12-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Dart/" itemprop="url" rel="index"><span itemprop="name">Dart</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Dart/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/09/Javaer入门Dart/" class="leancloud_visitors" data-flag-title="Javaer入门Dart">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>如果你是一名Java开发人员，可以通过 <a href="https://codelabs.developers.google.com/codelabs/from-java-to-dart/index.html#0" target="_blank" rel="noopener">codelabs</a> 快速入门Dart。</p>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>Dart是一门用于Flutter的编程语言，而Flutter是Google开发的移动应用SDK。 </p>
+<p>阅读本文，你将学习到：</p>
+<ul>
+<li>如何编写构造方法</li>
+<li>为对象赋值的多种方式</li>
+<li>如何 &amp; 何时创建getter和setter</li>
+<li>如何处理访问权限</li>
+<li>如何创建工厂模式</li>
+<li>函数式编程</li>
+<li>其他主要的概念</li>
+</ul>
+<p>此外，codelabs提供了 <a href="https://dartpad.dartlang.org/" target="_blank" rel="noopener">DartPad</a>  供大家编写Dart代码。</p>
+<h2 id="2-创建一个简单的Dart类"><a href="#2-创建一个简单的Dart类" class="headerlink" title="2. 创建一个简单的Dart类"></a>2. 创建一个简单的Dart类</h2><p>我们以一个简单的<code>Bicycle</code>类来进行学习，<code>Bicycle</code>类包含一些私有的成员变量，以及对应的setter和getter。<br>我们尝试编写<code>Bicycle</code>类然后通过<code>main()</code>方法将<code>Bicycle</code>实例打印到控制台。</p>
+<h3 id="2-1-启动DartPad"><a href="#2-1-启动DartPad" class="headerlink" title="2.1 启动DartPad"></a>2.1 启动DartPad</h3><p>现在可以打开 <a href="https://dartpad.dartlang.org/" target="_blank" rel="noopener">DartPad</a> ，一边编写Dart代码。</p>
+<h3 id="2-2-定义Bicycle类"><a href="#2-2-定义Bicycle类" class="headerlink" title="2.2 定义Bicycle类"></a>2.2 定义Bicycle类</h3><p>在DartPad定义一个<code>Bicycle</code>类，其中包含三个成员变量：<code>cadence</code>、<code>speed</code>和<code>gear</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Bicycle &#123;</span><br><span class="line">  int cadence;</span><br><span class="line">  int speed;</span><br><span class="line">  int gear;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void main() &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/12/09/Javaer入门Dart/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://pentonbin.github.io/2018/03/07/Ubuntu16.04安装VMWare Workstation/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1050,7 +1250,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1067,7 +1267,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1092,7 +1296,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1808,6 +2016,8 @@
 
   
   
+    
+      
     
       
     
