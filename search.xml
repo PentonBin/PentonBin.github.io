@@ -9,9 +9,9 @@
         <category>Android</category>
       </categories>
       <tags>
+        <tag>Android</tag>
         <tag>Dart</tag>
         <tag>Flutter</tag>
-        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -35,8 +35,8 @@
         <category>Android</category>
       </categories>
       <tags>
-        <tag>Android</tag>
         <tag>Ubuntu</tag>
+        <tag>Android</tag>
         <tag>开发环境</tag>
       </tags>
   </entry>
